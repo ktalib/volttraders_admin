@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradePro | The Future of Crypto Trading</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7b2cbf;
+            --secondary: #00b4d8;
+            --dark: #0d0d1a;
+            --light: #f8f9fa;
+            --accent: #ff9e00;
+            --success: #00e676;
+            --danger: #ff3d00;
+            --warning: #ffab00;
+            --info: #00b0ff;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: white;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--secondary));
+            border-radius: 10px;
+        }
+
+        /* Particles Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 100%);
+        }
+
+        /* Header - Glass Morphism */
+        header {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 800;
+            text-decoration: none;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.5s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2.2rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons .btn {
+            margin-left: 1rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-login {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--glass-border);
+        }
+
+        .btn-login:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-register {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(123, 44, 191, 0.4);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu:hover {
+            color: var(--secondary);
+        }
+
+        /* Hero Section - 3D & Parallax Effect */
+        .hero {
+            padding: 12rem 0 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 3rem;
+            animation: fadeInLeft 1s ease;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 0 20px rgba(123, 44, 191, 0.5));
+        }
+
+        .hero-image:hover img {
+            transform: perspective(1000px) rotateY(-5deg) rotateX(2deg) scale(1.03);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, white, #d1d1d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(123, 44, 191, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            padding: 1rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(123, 44, 191, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Floating Crypto Icons */
+        .floating-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-icon {
+            position: absolute;
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+            filter: drop-shadow(0 0 10px rgba(123, 44, 191, 0.5));
+        }
+
+        /* Features Section - Glass Cards */
+        .features {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title h2 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(90deg, white, #d1d1d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            bottom: -15px;
+            left: 25%;
+            border-radius: 5px;
+        }
+
+        .section-title p {
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(123, 44, 191, 0.1) 0%, transparent 70%);
+            z-index: -1;
+            transition: all 0.5s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border-color: rgba(123, 44, 191, 0.5);
+        }
+
+        .feature-card:hover::before {
+            transform: rotate(180deg);
+        }
+
+        .feature-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            color: white;
+            font-size: 2.5rem;
+            box-shadow: 0 10px 30px rgba(123, 44, 191, 0.4);
+            transition: all 0.5s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotateY(180deg) scale(1.1);
+            box-shadow: 0 15px 40px rgba(123, 44, 191, 0.6);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        /* Market Section - Neon Glow Table */
+        .market {
+            padding: 8rem 0;
+            position: relative;
+            background: linear-gradient(180deg, rgba(13, 13, 26, 0.8) 0%, rgba(26, 26, 46, 0.9) 100%);
+        }
+
+        .market::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2232&q=80') center/cover no-repeat;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .market-table {
+            background: rgba(13, 13, 26, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .market-table::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 65%, rgba(123, 44, 191, 0.1) 100%);
+            pointer-events: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            background: linear-gradient(90deg, rgba(123, 44, 191, 0.3), rgba(0, 180, 216, 0.3));
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: rgba(123, 44, 191, 0.1);
+        }
+
+        .coin {
+            display: flex;
+            align-items: center;
+        }
+
+        .coin-icon {
+            width: 36px;
+            height: 36px;
+            margin-right: 15px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .coin-name {
+            font-weight: 600;
+        }
+
+        .coin-symbol {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-left: 5px;
+        }
+
+        .price-up {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .price-up::before {
+            content: '↑';
+            margin-right: 5px;
+        }
+
+        .price-down {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .price-down::before {
+            content: '↓';
+            margin-right: 5px;
+        }
+
+        /* Charts Section - Interactive */
+        .charts {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .chart-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+        }
+
+        .chart-card {
+            background: rgba(13, 13, 26, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 65%, rgba(123, 44, 191, 0.1) 100%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .chart-header h3 {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .chart-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .chart-placeholder {
+            height: 350px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 600;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.05),
+                transparent
+            );
+            animation: shimmer 2s infinite;
+        }
+
+        /* CTA Section - Glowing Gradient */
+        .cta {
+            padding: 10rem 0;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(123, 44, 191, 0.2) 0%, transparent 70%);
+            z-index: -1;
+            animation: rotate 30s linear infinite;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem;
+            background: rgba(13, 13, 26, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4),
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .cta h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(90deg, white, #d1d1d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .btn-cta {
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            box-shadow: 0 10px 30px rgba(123, 44, 191, 0.5),
+                        0 0 0 3px rgba(123, 44, 191, 0.3);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(123, 44, 191, 0.7),
+                        0 0 0 5px rgba(123, 44, 191, 0.2);
+        }
+
+        /* Footer - Futuristic */
+        footer {
+            background: linear-gradient(180deg, rgba(13, 13, 26, 0.9) 0%, #0d0d1a 100%);
+            padding: 6rem 0 3rem;
+            position: relative;
+            border-top: 1px solid rgba(123, 44, 191, 0.2);
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: white;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            bottom: -10px;
+            left: 0;
+            border-radius: 3px;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-about {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            color: var(--secondary);
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-links a:hover i {
+            color: var(--primary);
+            transform: scale(1.3);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: all 0.6s ease;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 10px 30px rgba(123, 44, 191, 0.5);
+        }
+
+        .social-links a:hover::before {
+            transform: translateX(100%);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes shine {
+            from {
+                left: -100%;
+                top: -100%;
+            }
+            to {
+                left: 100%;
+                top: 100%;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .animate {
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .animate.fadeInLeft {
+            animation: fadeInLeft 1s ease;
+        }
+
+        .animate.fadeInRight {
+            animation: fadeInRight 1s ease;
+        }
+
+        .animate.fadeInUp {
+            animation: fadeInUp 1s ease;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 3rem;
+            }
+            
+            .cta h2 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 4rem;
+                text-align: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .chart-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .auth-buttons {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .feature-card {
+                padding: 2rem;
+            }
+            
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+            
+            .cta p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-content {
+                padding: 2rem;
+            }
+            
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    TradePro
+                </a>
+                
+                <div class="auth-buttons">
+                    <a href="/user/login" class="btn btn-login">Login</a>
+                    <a href="/user/register" class="btn btn-register">Register</a>
+                </div>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text animate fadeInLeft">
+                    <h1>Next-Gen Crypto Trading Platform</h1>
+                    <p>Experience institutional-grade trading tools, AI-powered analytics, and lightning-fast execution on the most advanced cryptocurrency platform.</p>
+                    <div class="hero-buttons">
+                        <a href="/user/register" class="btn btn-primary">Start Trading</a>
+                        <a href="#features" class="btn btn-outline">Explore Features</a>
+                    </div>
+                </div>
+                <div class="hero-image animate fadeInRight">
+                    <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2232&q=80" alt="TradePro Dashboard">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title animate fadeInUp">
+                <h2>Unmatched Trading Experience</h2>
+                <p>Professional tools designed for traders of all levels</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Lightning Execution</h3>
+                    <p>Our high-frequency trading engine executes orders in microseconds with 99.99% uptime.</p>
+                </div>
+                <div class="feature-card animate fadeInUp" style="animation-delay: 0.4s;">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI Analytics</h3>
+                    <p>Machine learning algorithms provide real-time market predictions and trading signals.</p>
+                </div>
+                <div class="feature-card animate fadeInUp" style="animation-delay: 0.6s;">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Military Security</h3>
+                    <p>Multi-sig cold storage, biometric authentication, and institutional-grade protection.</p>
+                </div>
+                <div class="feature-card animate fadeInUp" style="animation-delay: 0.8s;">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-network"></i>
+                    </div>
+                    <h3>Advanced Charts</h3>
+                    <p>150+ technical indicators, drawing tools, and multi-timeframe analysis.</p>
+                </div>
+                <div class="feature-card animate fadeInUp" style="animation-delay: 1s;">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Algorithmic Trading</h3>
+                    <p>Build, test, and deploy automated trading strategies with our visual bot builder.</p>
+                </div>
+                <div class="feature-card animate fadeInUp" style="animation-delay: 1.2s;">
+                    <div class="feature-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3>500+ Markets</h3>
+                    <p>Trade all major cryptocurrencies with deep liquidity across spot, margin, and futures.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Section -->
+    <section class="market" id="market">
+        <div class="container">
+            <div class="section-title animate fadeInUp">
+                <h2>Real-Time Market Data</h2>
+                <p>Track prices, volume, and trends across all major cryptocurrencies</p>
+            </div>
+            <div class="market-table animate fadeInUp" style="animation-delay: 0.2s;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Coin</th>
+                            <th>Price</th>
+                            <th>24h Change</th>
+                            <th>Market Cap</th>
+                            <th>Volume (24h)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="coin">
+                                    <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin" class="coin-icon">
+                                    <span class="coin-name">Bitcoin</span>
+                                    <span class="coin-symbol">BTC</span>
+                                </div>
+                            </td>
+                            <td>$42,876.12</td>
+                            <td class="price-up">+2.34%</td>
+                            <td>$820.4B</td>
+                            <td>$24.3B</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="coin">
+                                    <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum" class="coin-icon">
+                                    <span class="coin-name">Ethereum</span>
+                                    <span class="coin-symbol">ETH</span>
+                                </div>
+                            </td>
+                            <td>$2,345.67</td>
+                            <td class="price-up">+1.56%</td>
+                            <td>$280.1B</td>
+                            <td>$12.7B</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="coin">
+                                    <img src="https://cryptologos.cc/logos/cardano-ada-logo.png" alt="Cardano" class="coin-icon">
+                                    <span class="coin-name">Cardano</span>
+                                    <span class="coin-symbol">ADA</span>
+                                </div>
+                            </td>
+                            <td>$0.4567</td>
+                            <td class="price-down">-0.78%</td>
+                            <td>$15.9B</td>
+                            <td>$1.2B</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="coin">
+                                    <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana" class="coin-icon">
+                                    <span class="coin-name">Solana</span>
+                                    <span class="coin-symbol">SOL</span>
+                                </div>
+                            </td>
+                            <td>$98.76</td>
+                            <td class="price-up">+5.23%</td>
+                            <td>$41.2B</td>
+                            <td>$3.4B</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="coin">
+                                    <img src="https://cryptologos.cc/logos/xrp-xrp-logo.png" alt="XRP" class="coin-icon">
+                                    <span class="coin-name">XRP</span>
+                                    <span class="coin-symbol">XRP</span>
+                                </div>
+                            </td>
+                            <td>$0.5678</td>
+                            <td class="price-down">-1.12%</td>
+                            <td>$28.7B</td>
+                            <td>$2.1B</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="charts" id="charts">
+        <div class="container">
+            <div class="section-title animate fadeInUp">
+                <h2>Advanced Charting Tools</h2>
+                <p>Professional technical analysis with institutional-grade features</p>
+            </div>
+            <div class="chart-container">
+                <div class="chart-card animate fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="chart-header">
+                        <h3>BTC/USDT</h3>
+                        <div class="chart-price price-up">$42,876.12 (+2.34%)</div>
+                    </div>
+                    <div class="chart-placeholder">
+                        Interactive BTC/USDT Chart
+                    </div>
+                </div>
+                <div class="chart-card animate fadeInUp" style="animation-delay: 0.4s;">
+                    <div class="chart-header">
+                        <h3>ETH/USDT</h3>
+                        <div class="chart-price price-up">$2,345.67 (+1.56%)</div>
+                    </div>
+                    <div class="chart-placeholder">
+                        Interactive ETH/USDT Chart
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content animate fadeInUp">
+                <h2>Ready to Trade Like a Pro?</h2>
+                <p>Join over 1 million traders worldwide who trust TradePro for their cryptocurrency trading. Sign up today and get started in minutes with our advanced platform.</p>
+                <a href="/user/register" class="btn btn-cta">Get Started Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="about">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <i class="fas fa-chart-line"></i>
+                        TradePro
+                    </div>
+                    <p class="footer-about">The most advanced cryptocurrency trading platform with institutional-grade tools for professional traders and investors worldwide.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-medium"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Products</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Exchange</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Pro Trading</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Margin Trading</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Futures</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> API</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Help Center</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Trading Guides</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Market Analysis</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Status</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Careers</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Fees</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Legal</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 TradePro. All rights reserved. | Cryptocurrency trading involves risk.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        // Initialize particles.js
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": ["#7b2cbf", "#00b4d8", "#ff9e00"]
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#7b2cbf",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 0.5
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            // Animation on scroll
+            const animateElements = document.querySelectorAll('.animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Mobile menu toggle
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            const authButtons = document.querySelector('.auth-buttons');
+            
+            mobileMenu.addEventListener('click', function() {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                authButtons.style.display = authButtons.style.display === 'flex' ? 'none' : 'flex';
+                
+                if (navLinks.style.display === 'flex') {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (navLinks.style.display === 'flex') {
+                            navLinks.style.display = 'none';
+                            authButtons.style.display = 'none';
+                            document.body.style.overflow = 'auto';
+                        }
+                    }
+                });
+            });
+
+            // Real-time price animation
+            function updatePrices() {
+                const priceElements = document.querySelectorAll('.price-up, .price-down');
+                const coins = [
+                    { symbol: 'BTC', price: 42876.12, volatility: 500 },
+                    { symbol: 'ETH', price: 2345.67, volatility: 50 },
+                    { symbol: 'ADA', price: 0.4567, volatility: 0.02 },
+                    { symbol: 'SOL', price: 98.76, volatility: 2 },
+                    { symbol: 'XRP', price: 0.5678, volatility: 0.01 }
+                ];
+                
+                priceElements.forEach(element => {
+                    const row = element.closest('tr');
+                    if (!row) return;
+                    
+                    const coinSymbol = row.querySelector('.coin-symbol').textContent;
+                    const coinData = coins.find(c => c.symbol === coinSymbol);
+                    if (!coinData) return;
+                    
+                    // Simulate price movement
+                    const change = (Math.random() * 2 - 1) * coinData.volatility;
+                    const newPrice = coinData.price + change;
+                    const percentChange = (change / coinData.price * 100).toFixed(2);
+                    
+                    // Update price
+                    row.querySelector('td:nth-child(2)').textContent = `$${newPrice.toFixed(2)}`;
+                    
+                    // Update change
+                    if (percentChange >= 0) {
+                        element.className = 'price-up';
+                        element.innerHTML = `+${Math.abs(percentChange)}%`;
+                    } else {
+                        element.className = 'price-down';
+                        element.innerHTML = `-${Math.abs(percentChange)}%`;
+                    }
+                    
+                    // Update chart prices if this is the BTC or ETH row
+                    if (coinSymbol === 'BTC') {
+                        document.querySelector('.chart-card:nth-child(1) .chart-price').textContent = 
+                            `$${newPrice.toFixed(2)} (${percentChange >= 0 ? '+' : ''}${percentChange}%)`;
+                        document.querySelector('.chart-card:nth-child(1) .chart-price').className = 
+                            `chart-price ${percentChange >= 0 ? 'price-up' : 'price-down'}`;
+                    } else if (coinSymbol === 'ETH') {
+                        document.querySelector('.chart-card:nth-child(2) .chart-price').textContent = 
+                            `$${newPrice.toFixed(2)} (${percentChange >= 0 ? '+' : ''}${percentChange}%)`;
+                        document.querySelector('.chart-card:nth-child(2) .chart-price').className = 
+                            `chart-price ${percentChange >= 0 ? 'price-up' : 'price-down'}`;
+                    }
+                });
+            }
+
+            // Update prices every 3 seconds
+            setInterval(updatePrices, 3000);
+            
+            // Initial price update
+            updatePrices();
+        });
+    </script>
+</body>
+</html>
