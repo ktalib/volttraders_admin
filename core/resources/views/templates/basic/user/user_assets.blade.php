@@ -22,7 +22,6 @@
                 <nav class="flex space-x-8">
                     <button data-tab="overviewTab" class="tab-button px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors">Overview</button>
                     <button data-tab="assetsTab" class="tab-button px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors">Assets</button>
-                    <button data-tab="activityTab" class="tab-button px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors">Recent Activity</button>
                 </nav>
             </div>
         </div>
@@ -113,7 +112,6 @@
             <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-lg font-semibold text-gray-800">Recent Activity</h2>
-                    <a href="#" onclick="switchTab('activityTab'); return false;" class="text-sm text-blue-600 hover:text-blue-800">View all</a>
                 </div>
                 
                 <div class="divide-y divide-gray-100">
@@ -188,27 +186,16 @@
                     </div>
                 </div>
                 
-                <!-- Market Overview -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <p class="text-sm text-gray-500 mb-1">BTC/USD</p>
-                        <p class="text-xl font-bold">$28,356.41</p>
-                        <p class="text-sm market-trend-positive">+1.24%</p>
+                <!-- Live Market Overview with TradingView Widgets -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <!-- TradingView Widget for BTC/USD -->
+                    <div class="tradingview-widget-container">
+                        <div id="tradingview_btc" style="height: 220px;"></div>
                     </div>
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <p class="text-sm text-gray-500 mb-1">ETH/USD</p>
-                        <p class="text-xl font-bold">$1,852.08</p>
-                        <p class="text-sm market-trend-negative">-0.56%</p>
-                    </div>
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <p class="text-sm text-gray-500 mb-1">XRP/USD</p>
-                        <p class="text-xl font-bold">$0.5124</p>
-                        <p class="text-sm market-trend-positive">+2.34%</p>
-                    </div>
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <p class="text-sm text-gray-500 mb-1">SOL/USD</p>
-                        <p class="text-xl font-bold">$26.85</p>
-                        <p class="text-sm market-trend-positive">+5.12%</p>
+                    
+                    <!-- TradingView Widget for ETH/USD -->
+                    <div class="tradingview-widget-container">
+                        <div id="tradingview_eth" style="height: 220px;"></div>
                     </div>
                 </div>
                 
@@ -284,146 +271,9 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Activity Tab -->
-        <div id="activityTab" class="tab-content hidden">
-            <div class="bg-white rounded-xl shadow-sm p-6">
-                <h2 class="text-xl font-semibold text-gray-800 mb-6">Transaction History</h2>
-                
-                <!-- Filter Controls -->
-                <div class="flex flex-wrap items-center gap-4 mb-6">
-                    <div class="relative">
-                        <select class="appearance-none bg-gray-50 border border-gray-200 rounded-lg pl-4 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option>All Types</option>
-                            <option>Deposits</option>
-                            <option>Withdrawals</option>
-                            <option>Transfers</option>
-                        </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    
-                    <div class="relative">
-                        <select class="appearance-none bg-gray-50 border border-gray-200 rounded-lg pl-4 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option>All Assets</option>
-                            <option>Bitcoin</option>
-                            <option>Ethereum</option>
-                            <option>XRP</option>
-                        </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    
-                    <div class="relative">
-                        <select class="appearance-none bg-gray-50 border border-gray-200 rounded-lg pl-4 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option>Last 30 days</option>
-                            <option>Last 7 days</option>
-                            <option>Last 24 hours</option>
-                            <option>All time</option>
-                        </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Transactions List -->
-                <div class="divide-y divide-gray-100">
-                    <!-- Sample Transactions - Replace with actual data -->
-                    <div class="py-4 flex justify-between items-center">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <p class="font-medium">Deposit Bitcoin</p>
-                                <p class="text-xs text-gray-500">Transaction ID: b2c4f8e9a3d5...</p>
-                                <p class="text-xs text-gray-500">June 15, 2023 • 09:24 AM</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="font-medium text-green-600">+0.05 BTC</p>
-                            <p class="text-sm text-gray-500">≈ $1,245.00</p>
-                            <span class="inline-block px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium mt-1">Completed</span>
-                        </div>
-                    </div>
-                    
-                    <div class="py-4 flex justify-between items-center">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-3">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <p class="font-medium">Withdraw Ethereum</p>
-                                <p class="text-xs text-gray-500">Transaction ID: a1b2c3d4e5f6...</p>
-                                <p class="text-xs text-gray-500">June 14, 2023 • 06:54 PM</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="font-medium text-red-600">-2.5 ETH</p>
-                            <p class="text-sm text-gray-500">≈ $4,621.23</p>
-                            <span class="inline-block px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium mt-1">Completed</span>
-                        </div>
-                    </div>
-                    
-                    <div class="py-4 flex justify-between items-center">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <p class="font-medium">Transfer XRP</p>
-                                <p class="text-xs text-gray-500">Transaction ID: x7y8z9a1b2...</p>
-                                <p class="text-xs text-gray-500">June 12, 2023 • 11:32 AM</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="font-medium text-blue-600">+150 XRP</p>
-                            <p class="text-sm text-gray-500">≈ $150.75</p>
-                            <span class="inline-block px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium mt-1">Completed</span>
-                        </div>
-                    </div>
-                    
-                    <div class="py-4 flex justify-between items-center">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mr-3">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <p class="font-medium">Deposit Solana</p>
-                                <p class="text-xs text-gray-500">Transaction ID: s9t8u7v6w5...</p>
-                                <p class="text-xs text-gray-500">June 10, 2023 • 02:15 PM</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="font-medium text-amber-600">+10 SOL</p>
-                            <p class="text-sm text-gray-500">≈ $268.50</p>
-                            <span class="inline-block px-2 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-medium mt-1">Pending</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </main>
 
-@push('style')
 <style>
     .tooltip {
         position: relative;
@@ -516,9 +366,7 @@
         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
     }
 </style>
-@endpush
 
-@push('script')
 <script>
 // Tab switching functionality
 function switchTab(tabId) {
@@ -558,6 +406,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set overview tab as default
     switchTab('overviewTab');
     
+    // Add event listeners to all tab buttons
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            switchTab(tabId);
+            
+            // Initialize TradingView widgets when assets tab is selected
+            if (tabId === 'assetsTab') {
+                initTradingViewWidgets();
+            }
+        });
+    });
+    
     // Add search event listener
     document.getElementById('assetSearch').addEventListener('input', searchAssets);
     
@@ -566,15 +427,108 @@ document.addEventListener('DOMContentLoaded', function() {
         const refreshIcon = this.querySelector('svg');
         refreshIcon.classList.add('animate-spin');
         
+        // Refresh crypto prices
+        updateCryptoPrices();
+        
         // Simulate refresh with timeout
         setTimeout(() => {
             refreshIcon.classList.remove('animate-spin');
             // Add a notification or feedback here
         }, 1500);
     });
+    
+    // Auto-refresh prices every 30 seconds
+    setInterval(updateCryptoPrices, 30000);
 });
 
-// Optional: Add chart functionality here if you add chart libraries
+// Function to initialize TradingView widgets
+function initTradingViewWidgets() {
+    // Check if TradingView script is already loaded
+    if (typeof TradingView === 'undefined') {
+        // Load TradingView script
+        const script = document.createElement('script');
+        script.src = 'https://s3.tradingview.com/tv.js';
+        script.async = true;
+        script.onload = createWidgets;
+        document.head.appendChild(script);
+    } else {
+        createWidgets();
+    }
+}
+
+// Create TradingView chart widgets
+function createWidgets() {
+    // BTC/USD Widget
+    new TradingView.widget({
+        "autosize": true,
+        "symbol": "BITSTAMP:BTCUSD",
+        "interval": "15",
+        "timezone": "Etc/UTC",
+        "theme": "light",
+        "style": "1",
+        "locale": "en",
+        "toolbar_bg": "#f1f3f6",
+        "enable_publishing": false,
+        "hide_legend": true,
+        "save_image": false,
+        "container_id": "tradingview_btc"
+    });
+    
+    // ETH/USD Widget
+    new TradingView.widget({
+        "autosize": true,
+        "symbol": "BITSTAMP:ETHUSD",
+        "interval": "15",
+        "timezone": "Etc/UTC",
+        "theme": "light",
+        "style": "1",
+        "locale": "en",
+        "toolbar_bg": "#f1f3f6",
+        "enable_publishing": false,
+        "hide_legend": true,
+        "save_image": false,
+        "container_id": "tradingview_eth"
+    });
+}
+
+// Function to update crypto prices in the assets table
+function updateCryptoPrices() {
+    document.querySelectorAll('.asset-table-row').forEach(row => {
+        const currency = row.querySelector('.asset-name').textContent;
+        const priceCell = row.querySelector('td:nth-child(3)');
+        const valueCell = row.querySelector('td:nth-child(5)');
+        const holdings = parseFloat(row.querySelector('td:nth-child(4)').textContent.split(' ')[0].replace(',', ''));
+        
+        // Add loading indicator
+        priceCell.innerHTML = '<p class="font-medium text-gray-400">Loading...</p>';
+        
+        // Fetch the current price
+        fetch(`https://min-api.cryptocompare.com/data/price?fsym=${currency}&tsyms=USD&api_key=6994a7265d2d0ad7b35a3de4ff877b7c54d8e922f7c7c05141a4583ed300fcfd`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.USD) {
+                    const price = data.USD;
+                    const value = price * holdings;
+                    
+                    // Update price display
+                    priceCell.innerHTML = `
+                        <p class="font-medium">$${parseFloat(price).toFixed(2)}</p>
+                        <p class="text-xs text-green-600">Updated now</p>
+                    `;
+                    
+                    // Update value display
+                    valueCell.innerHTML = `$${parseFloat(value).toFixed(2)}`;
+                } else {
+                    priceCell.innerHTML = '<p class="font-medium text-gray-400">Unavailable</p>';
+                    valueCell.innerHTML = '<span class="text-gray-400">--</span>';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching price:', error);
+                priceCell.innerHTML = '<p class="font-medium text-red-400">Error loading</p>';
+            });
+    });
+}
 </script>
-@endpush
+
 @endsection

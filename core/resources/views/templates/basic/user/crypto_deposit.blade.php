@@ -164,11 +164,70 @@
         document.getElementById('depositModal').classList.add('hidden');
     });
 
-    // Update Wallet Address
+    // Update Wallet Address and Crypto Icon
     document.getElementById('cryptoMethod')?.addEventListener('change', function () {
         const selectedOption = this.options[this.selectedIndex];
+        
+        // Update wallet address
         const walletAddress = selectedOption.getAttribute('data-wallet');
         document.getElementById('walletAddress').value = walletAddress || '';
+        
+        // Update crypto icon
+        const iconUrl = selectedOption.getAttribute('data-icon');
+        const cryptoIcon = document.getElementById('cryptoIcon');
+        if (cryptoIcon && iconUrl) {
+            cryptoIcon.innerHTML = `<img src="${iconUrl}" alt="${selectedOption.value}" class="h-5 w-5">`;
+        } else {
+            cryptoIcon.textContent = selectedOption.value;
+        }
+    });
+
+    // Copy wallet address to clipboard
+    document.getElementById('copyAddressButton')?.addEventListener('click', function() {
+        const walletAddress = document.getElementById('walletAddress');
+        
+        if (walletAddress.value) {
+            // Select the text
+            walletAddress.select();
+            walletAddress.setSelectionRange(0, 99999); // For mobile devices
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(walletAddress.value)
+                .then(() => {
+                    // Provide visual feedback
+                    const originalColor = this.classList.contains('text-indigo-600') ? 'text-indigo-600' : 'text-gray-400';
+                    this.classList.remove(originalColor);
+                    this.classList.add('text-green-500');
+                    
+                    // Change back after a short delay
+                    setTimeout(() => {
+                        this.classList.remove('text-green-500');
+                        this.classList.add(originalColor);
+                    }, 1000);
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
+    });
+
+    // Set initial wallet address on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        const cryptoMethod = document.getElementById('cryptoMethod');
+        if (cryptoMethod) {
+            const selectedOption = cryptoMethod.options[cryptoMethod.selectedIndex];
+            const walletAddress = selectedOption.getAttribute('data-wallet');
+            document.getElementById('walletAddress').value = walletAddress || '';
+            
+            // Also set initial crypto icon
+            const iconUrl = selectedOption.getAttribute('data-icon');
+            const cryptoIcon = document.getElementById('cryptoIcon');
+            if (cryptoIcon && iconUrl) {
+                cryptoIcon.innerHTML = `<img src="${iconUrl}" alt="${selectedOption.value}" class="h-5 w-5">`;
+            } else {
+                cryptoIcon.textContent = selectedOption.value;
+            }
+        }
     });
 </script>
 @endsection

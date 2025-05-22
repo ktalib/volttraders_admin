@@ -22,71 +22,58 @@
             </div>
         </div>
 
-        <!-- Market Summary Cards -->
+        <!-- Market Summary Cards with TradingView -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+            <!-- TradingView Widget Container -->
+            <div class="col-span-full mb-4">
+                <div class="tradingview-widget-container">
+                    <div id="tradingview_market_overview"></div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4" id="btc-card">
                 <div class="flex justify-between">
                     <span class="text-sm text-gray-500">Bitcoin</span>
-                    <span class="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full font-medium">+1.2%</span>
+                    <span class="text-xs px-2 py-1 rounded-full font-medium" id="btc-change"></span>
                 </div>
                 <div class="mt-2">
-                    <div class="text-xl font-bold">$37,245.80</div>
-                    <div class="flex items-center text-xs text-green-600 mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-                        </svg>
-                        $420.45 today
-                    </div>
+                    <div class="text-xl font-bold" id="btc-price">$--,---.--</div>
+                    <div class="flex items-center text-xs mt-1" id="btc-diff"></div>
                 </div>
             </div>
             
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4" id="eth-card">
                 <div class="flex justify-between">
                     <span class="text-sm text-gray-500">Ethereum</span>
-                    <span class="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full font-medium">+3.4%</span>
+                    <span class="text-xs px-2 py-1 rounded-full font-medium" id="eth-change"></span>
                 </div>
                 <div class="mt-2">
-                    <div class="text-xl font-bold">$2,145.70</div>
-                    <div class="flex items-center text-xs text-green-600 mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-                        </svg>
-                        $71.20 today
-                    </div>
+                    <div class="text-xl font-bold" id="eth-price">$--,---.--</div>
+                    <div class="flex items-center text-xs mt-1" id="eth-diff"></div>
                 </div>
             </div>
             
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+            {{-- <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4" id="eur-card">
                 <div class="flex justify-between">
                     <span class="text-sm text-gray-500">Euro</span>
-                    <span class="text-xs px-2 py-1 bg-red-100 text-red-700 rounded-full font-medium">-0.5%</span>
+                    <span class="text-xs px-2 py-1 rounded-full font-medium" id="eur-change"></span>
                 </div>
                 <div class="mt-2">
-                    <div class="text-xl font-bold">$0.9324</div>
-                    <div class="flex items-center text-xs text-red-600 mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                        </svg>
-                        $0.0046 today
-                    </div>
+                    <div class="text-xl font-bold" id="eur-price">$--,---.--</div>
+                    <div class="flex items-center text-xs mt-1" id="eur-diff"></div>
                 </div>
-            </div>
+            </div> --}}
             
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+            {{-- <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4" id="spy-card">
                 <div class="flex justify-between">
                     <span class="text-sm text-gray-500">S&P 500</span>
-                    <span class="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full font-medium">+0.8%</span>
+                    <span class="text-xs px-2 py-1 rounded-full font-medium" id="spy-change"></span>
                 </div>
                 <div class="mt-2">
-                    <div class="text-xl font-bold">$4,890.25</div>
-                    <div class="flex items-center text-xs text-green-600 mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-                        </svg>
-                        $39.12 today
-                    </div>
+                    <div class="text-xl font-bold" id="spy-price">$--,---.--</div>
+                    <div class="flex items-center text-xs mt-1" id="spy-diff"></div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <!-- Filter Section -->
@@ -226,8 +213,186 @@
         </div>
     </div>
 </main>
-@endsection
 
-@push('script')
+
+ 
+<!-- TradingView Widget Script -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        // Load TradingView Market Overview Widget
+        new TradingView.widget({
+            "container_id": "tradingview_market_overview",
+            "width": "100%",
+            "height": 400,
+            "showChart": true,
+            "showFloatingTooltip": true,
+            "locale": "en",
+            "largeChartUrl": "{{ route('trade.index') }}",
+            "plotLineColorGrowing": "rgba(41, 98, 255, 1)",
+            "plotLineColorFalling": "rgba(255, 0, 0, 1)",
+            "gridLineColor": "rgba(42, 46, 57, 0)",
+            "scaleFontColor": "rgba(120, 123, 134, 1)",
+            "belowLineFillColorGrowing": "rgba(41, 98, 255, 0.12)",
+            "belowLineFillColorFalling": "rgba(255, 0, 0, 0.12)",
+            "symbolActiveColor": "rgba(41, 98, 255, 0.12)",
+            "tabs": [
+                {
+                    "title": "Cryptocurrencies",
+                    "symbols": [
+                        {
+                            "s": "BITSTAMP:BTCUSD",
+                            "d": "Bitcoin"
+                        },
+                        {
+                            "s": "BITSTAMP:ETHUSD",
+                            "d": "Ethereum"
+                        },
+                        {
+                            "s": "BINANCE:BNBUSD",
+                            "d": "Binance Coin"
+                        },
+                        {
+                            "s": "BITSTAMP:XRPUSD",
+                            "d": "Ripple"
+                        }
+                    ],
+                    "originalTitle": "Cryptocurrencies"
+                },
+                {
+                    "title": "Forex",
+                    "symbols": [
+                        {
+                            "s": "FX:EURUSD",
+                            "d": "EUR/USD"
+                        },
+                        {
+                            "s": "FX:GBPUSD",
+                            "d": "GBP/USD"
+                        },
+                        {
+                            "s": "FX:USDJPY",
+                            "d": "USD/JPY"
+                        }
+                    ],
+                    "originalTitle": "Forex"
+                },
+                {
+                    "title": "Stocks",
+                    "symbols": [
+                        {
+                            "s": "NASDAQ:AAPL",
+                            "d": "Apple"
+                        },
+                        {
+                            "s": "NASDAQ:MSFT",
+                            "d": "Microsoft"
+                        },
+                        {
+                            "s": "NASDAQ:AMZN",
+                            "d": "Amazon"
+                        },
+                        {
+                            "s": "NYSE:SPY",
+                            "d": "S&P 500 ETF"
+                        }
+                    ],
+                    "originalTitle": "Stocks"
+                }
+            ]
+        });
+        
+        // Update market summary cards with live data
+        updateMarketSummaryCards();
+    });
+    
+    function updateMarketSummaryCards() {
+        // Define our assets to track
+        const assets = [
+            { symbol: 'BTCUSD', id: 'btc', name: 'Bitcoin', exchange: 'BITSTAMP' },
+            { symbol: 'ETHUSD', id: 'eth', name: 'Ethereum', exchange: 'BITSTAMP' },
+            { symbol: 'EURUSD', id: 'eur', name: 'Euro', exchange: 'FX' },
+            { symbol: 'SPY', id: 'spy', name: 'S&P 500', exchange: 'NYSE' }
+        ];
+        
+        // Update each asset
+        assets.forEach(asset => {
+            fetchAssetPrice(asset);
+        });
+        
+        // Refresh every 30 seconds
+        setTimeout(updateMarketSummaryCards, 30000);
+    }
+    
+    function fetchAssetPrice(asset) {
+        const symbol = asset.exchange + ':' + asset.symbol;
+        const apiUrl = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=c9j1ouaad3i9rj7j25kg`;
+        
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.c) {
+                    updateAssetCard(asset.id, data.c, data.pc, data.c - data.pc);
+                } else {
+                    // Fallback to CoinGecko for crypto if Finnhub fails
+                    if (asset.id === 'btc' || asset.id === 'eth') {
+                        const coinId = asset.id === 'btc' ? 'bitcoin' : 'ethereum';
+                        fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd&include_24hr_change=true`)
+                            .then(response => response.json())
+                            .then(data => {
+                                const price = data[coinId].usd;
+                                const change = data[coinId].usd_24h_change;
+                                const diff = price * change / 100;
+                                updateAssetCard(asset.id, price, price - diff, diff);
+                            })
+                            .catch(error => console.error('Error fetching crypto data:', error));
+                    }
+                }
+            })
+            .catch(error => console.error('Error fetching price data:', error));
+    }
+    
+    function updateAssetCard(id, currentPrice, previousPrice, diff) {
+        const priceElement = document.getElementById(`${id}-price`);
+        const changeElement = document.getElementById(`${id}-change`);
+        const diffElement = document.getElementById(`${id}-diff`);
+        
+        if (priceElement && changeElement && diffElement) {
+            // Format the price
+            priceElement.textContent = '$' + currentPrice.toLocaleString('en-US', { 
+                minimumFractionDigits: 2, 
+                maximumFractionDigits: 2 
+            });
+            
+            // Calculate percent change
+            const percentChange = ((currentPrice - previousPrice) / previousPrice) * 100;
+            
+            // Set change badge
+            if (percentChange >= 0) {
+                changeElement.textContent = '+' + percentChange.toFixed(2) + '%';
+                changeElement.className = 'text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full font-medium';
+                
+                diffElement.innerHTML = `
+                    <svg class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                    </svg>
+                    $${Math.abs(diff).toFixed(2)} today
+                `;
+                diffElement.className = 'flex items-center text-xs text-green-600 mt-1';
+            } else {
+                changeElement.textContent = percentChange.toFixed(2) + '%';
+                changeElement.className = 'text-xs px-2 py-1 bg-red-100 text-red-700 rounded-full font-medium';
+                
+                diffElement.innerHTML = `
+                    <svg class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                    $${Math.abs(diff).toFixed(2)} today
+                `;
+                diffElement.className = 'flex items-center text-xs text-red-600 mt-1';
+            }
+        }
+    }
+</script>
 @include($activeTemplate . 'user.market_js')
-@endpush
+@endsection
